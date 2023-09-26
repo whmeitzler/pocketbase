@@ -6,7 +6,7 @@
     import FieldsQueryParam from "@/components/collections/docs/FieldsQueryParam.svelte";
 
     export let collection;
-
+    window.APIClient = ApiClient
     let responseTab = 200;
     let responses = [];
     let baseData = {};
@@ -114,7 +114,15 @@ final record = await pb.collection('${collection?.name}').create(body: body);
 // (optional) send an email verification request
 await pb.collection('${collection?.name}').requestVerification('test@example.com');
 ` : ""
-)}
+)},
+curl={`
+curl \\
+    --request POST \\
+    --header "Content-Type: application/json" \\
+    --header "Authorization: ${JSON.parse(localStorage.getItem("pb_admin_auth"))?.token||"<AUTH TOKEN>"}" \\
+    --data '${JSON.stringify(Object.assign({}, baseData, CommonHelper.dummyCollectionSchemaData(collection)))}' \\
+    ${backendAbsUrl}/api/collections/things/records
+`}
 />
 
 <h6 class="m-b-xs">API details</h6>

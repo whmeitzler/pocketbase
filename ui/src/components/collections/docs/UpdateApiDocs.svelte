@@ -123,6 +123,14 @@ final pb = PocketBase('${backendAbsUrl}');
 final body = <String, dynamic>${JSON.stringify(Object.assign({}, baseData, CommonHelper.dummyCollectionSchemaData(collection)), null, 2)};
 
 final record = await pb.collection('${collection?.name}').update('RECORD_ID', body: body);
+    `},
+    curl={`
+    curl \\
+        --request PATCH \\
+        --header "Content-Type: application/json" \\
+        --header "Authorization: ${JSON.parse(localStorage.getItem("pb_admin_auth"))?.token||"<AUTH TOKEN>"}" \\
+        --data '${JSON.stringify(Object.assign({"id":"$RECORD_ID"}, baseData, CommonHelper.dummyCollectionSchemaData(collection)))}' \\
+        ${backendAbsUrl}/api/collections/things/records
     `}
 />
 

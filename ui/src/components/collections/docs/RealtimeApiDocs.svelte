@@ -92,6 +92,23 @@
         pb.collection('${collection?.name}').unsubscribe('RECORD_ID'); // remove all 'RECORD_ID' subscriptions
         pb.collection('${collection?.name}').unsubscribe('*'); // remove all '*' topic subscriptions
         pb.collection('${collection?.name}').unsubscribe(); // remove all subscriptions in the collection
+    `},
+    curl={`
+    
+    curl \\
+        --request GET \\
+        --header "Content-Type: application/json" \\
+        --header "Authorization: ${JSON.parse(localStorage.getItem("pb_admin_auth"))?.token||"<AUTH TOKEN>"}" \\
+        ${backendAbsUrl}/api/realtime
+
+    
+    #Then set the subscription    
+    curl \\
+        --request POST \\
+        --header "Content-Type: application/json" \\
+        --data '${JSON.stringify({clientId:"$CLIENT_ID",subscriptions:[collection?.id]})}' \\
+        --header "Authorization: ${JSON.parse(localStorage.getItem("pb_admin_auth"))?.token||"<AUTH TOKEN>"}" \\
+        ${backendAbsUrl}/api/realtime
     `}
 />
 
@@ -114,3 +131,5 @@
         2
     ).replace('"action": "create"', '"action": "create" // create, update or delete')}
 />
+
+

@@ -81,6 +81,12 @@
         ...
 
         await pb.collection('${collection?.name}').delete('RECORD_ID');
+    `},
+    curl={`curl \\
+        --request DELETE \\
+        --header "Content-Type: application/json" \\
+        --header "Authorization: ${JSON.parse(localStorage.getItem("pb_admin_auth"))?.token||"<AUTH TOKEN>"}" \\
+        ${backendAbsUrl}/api/collections/things/records/$RECORD_ID
     `}
 />
 

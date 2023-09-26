@@ -8,6 +8,7 @@
 
     export let js = "";
     export let dart = "";
+    export let curl = "";
 
     let activeTab = localStorage.getItem(SDK_PREFERENCE_KEY) || "javascript";
 
@@ -28,6 +29,12 @@
             language: "dart",
             content: dart,
             url: import.meta.env.PB_DART_SDK_URL,
+        },
+        {
+            title: "cURL",
+            language: "curl",
+            language: "plain",
+            content: curl,
         },
     ];
 </script>
@@ -50,9 +57,11 @@
                 <CodeBlock language={example.language} content={example.content} />
                 <div class="txt-right">
                     <em class="txt-sm txt-hint">
+                        {#if example.url}
                         <a href={example.url} target="_blank" rel="noopener noreferrer">
                             {example.title} SDK
                         </a>
+                        {/if}
                     </em>
                 </div>
             </div>

@@ -26,6 +26,10 @@
             label: "Realtime",
             component: import("@/components/collections/docs/RealtimeApiDocs.svelte"),
         },
+        realtimeMonitor: {
+            label: "Realtime Monitor",
+            component: import("@/components/collections/docs/RealtimeMonitor.svelte"),
+        },
     };
 
     const authTabs = {

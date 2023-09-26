@@ -73,6 +73,12 @@
         final record = await pb.collection('${collection?.name}').getOne('RECORD_ID',
           expand: 'relField1,relField2.subRelField',
         );
+    `},
+    curl={`curl \\
+        --header "Content-Type: application/json" \\
+        --request GET \\
+        --header "Authorization: ${JSON.parse(localStorage.getItem("pb_admin_auth"))?.token||"<AUTH TOKEN>"}" \\
+        ${backendAbsUrl}/api/collections/things/records/$RECORD_ID
     `}
 />
 
