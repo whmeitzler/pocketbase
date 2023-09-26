@@ -130,7 +130,7 @@ final record = await pb.collection('${collection?.name}').update('RECORD_ID', bo
         --header "Content-Type: application/json" \\
         --header "Authorization: ${JSON.parse(localStorage.getItem("pb_admin_auth"))?.token||"<AUTH TOKEN>"}" \\
         --data '${JSON.stringify(Object.assign({"id":"$RECORD_ID"}, baseData, CommonHelper.dummyCollectionSchemaData(collection)))}' \\
-        ${backendAbsUrl}/api/collections/things/records
+        ${backendAbsUrl}/api/collections/${collection?.id}/records
     `}
 />
 

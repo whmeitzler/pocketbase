@@ -120,7 +120,7 @@
         --header "Content-Type: application/json" \\
         --request GET \\
         --header "Authorization: ${JSON.parse(localStorage.getItem("pb_admin_auth"))?.token||"<AUTH TOKEN>"}" \\
-        ${backendAbsUrl}/api/collections/things/records/$RECORD_ID?page=1&perPage=5
+        ${backendAbsUrl}/api/collections/${collection?.id}/records/$RECORD_ID?page=1&perPage=5
     `}
         />
 
